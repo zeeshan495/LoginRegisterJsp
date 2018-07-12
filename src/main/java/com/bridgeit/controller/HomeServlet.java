@@ -1,13 +1,24 @@
+ /******************************************************************************
+ *  Purpose:	home servlet for Login Registeration Form
+ *
+ *  @author  Zeeshan
+ *  @version 1.0
+ *  @since   12-07-2018
+ *
+ ******************************************************************************/ 
 package com.bridgeit.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.http.HttpSession;
 import com.bridgeit.service.Service;
 
 /**
@@ -16,18 +27,10 @@ import com.bridgeit.service.Service;
 public class HomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public HomeServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		PrintWriter pw=response.getWriter();
 		Service service=new Service();
@@ -36,11 +39,34 @@ public class HomeServlet extends HttpServlet {
 		try {
 			boolean userExist=service.checkLoginUser(mailId,pwd);
 			if(userExist)
-				request.getRequestDispatcher("home.jsp").include(request, response);
-			else
+			{
+		//		****cookies****
+//				Cookie ck=new Cookie("mail",mailId);
+//				System.out.println("cookie : "+ck);
+//				response.addCookie(ck);
+//				response.sendRedirect("home.jsp");
+//				****httpsession***
+				HttpSession session = request.getSession();
+				session.setAttribute("mail", mailId);
+				session.setMaxInactiveInterval(10*60);
+				response.sendRedirect("home.jsp");
+				
+			//	request.getRequestDispatcher("home.jsp").include(request, response);
+			}
+				else
 			{
 				pw.println("Please check entered mail id and password");
-				request.getRequestDispatcher("index.jsp").include(request, response);
+				String loginError="Please check entered mail id and password";
+//				Cookie ck=new Cookie("loginError",loginError);
+//				response.addCookie(ck);
+//				HttpSession session = request.getSession();
+//				session.setAttribute("loginError", loginError);
+//				session.setMaxInactiveInterval(10*60);
+				RequestDispatcher rd=request.getRequestDispatcher("index.jsp");
+				request.setAttribute("loginError", loginError);
+				rd.include(request, response);
+			//	response.sendRedirect("index.jsp");
+			//	request.getRequestDispatcher("index.jsp").include(request, response);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

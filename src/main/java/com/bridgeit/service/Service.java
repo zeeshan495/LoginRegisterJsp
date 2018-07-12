@@ -1,7 +1,6 @@
 package com.bridgeit.service;
 
 import java.sql.SQLException;
-
 import com.bridgeit.dao.UserDao;
 import com.bridgeit.model.UserInfo;
 

@@ -7,7 +7,33 @@
 <title>welcome</title>
 </head>
 <body>
+<%
+/* /*HttppSession*/
+ String user=null;
+if(session.getAttribute("mail")==null)
+{
+	response.sendRedirect("index.jsp");
+}
+else 
+	user = (String) session.getAttribute("mail"); 
+
+
+/* String userName = null;
+Cookie[] cookies = request.getCookies();
+if(cookies !=null){
+for(Cookie cookie : cookies){
+	if(cookie.getName().equals("mail"))
+	{
+		userName = cookie.getValue();
+		
+	}
+}
+}
+if(userName == null) 
+	response.sendRedirect("index.jsp");  */
+%>
 <h1>welcome to home page</h1>
+
 <form action="LogoutUrl" method="post">
 <input type="submit" value="logout">
 </form>

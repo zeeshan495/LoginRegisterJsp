@@ -6,64 +6,87 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="register.css">
 <script type="text/javascript">
-function validEmail()
+
+
+function mailMessage(inputMail)
 {
-  var mail=document.myForm.mail.value;
-  var userName=document.myForm.uName.value;
-  var fullName=document.myForm.fName.value;
-  var password=document.myForm.Password.value;
-  var repassword=document.myForm.Repassword.value;
-  var mailFormat=/^[a-zA-Z]+[a-zA-Z0-9._]+@[a-z]+\.[a-z.]{2,5}$/;
-  console.log(mail);
-  if (userName.length>3 && fullName.length>3 && password.length>3 
-    && password==repassword && mailFormat.test(mail)) {
+    var mailFormat=/^[a-zA-Z]+[a-zA-Z0-9._]+@[a-z]+\.[a-z.]{2,5}$/;
+    if(!mailFormat.test(inputMail))
+      {
+      document.getElementById("email").innerHTML = "incorrect mail id";
+      return false;
+      }
+      else {
+        document.getElementById("email").innerHTML = "";
+          return true;
+         }
+}
+
+function lengthMessage(inputData)
+{
+  if(inputData.length<4)
+  {
+    document.getElementById("uname").innerHTML="atleast 4 characters";
+    return false;
+  }
+  else {
+    document.getElementById("uname").innerHTML="";
     return true;
   }
-  
-  if(userName.length<3)
-  {
-    document.getElementById("uname").innerHTML="atleast 3 characters";
-  }
-  if(fullName.length<3)
-  {
-    document.getElementById("fname").innerHTML="atleast 3 characters";
-  }
-  if(password.length<3)
-  {
-    document.getElementById("pwd").innerHTML="atleast 3 characters";
-  }
-  if(password!=repassword)
-  {
-    document.getElementById("repwd").innerHTML="password does not match";
-  }
-  if(!mailFormat.test(mail))
-    {
-    document.getElementById("email").innerHTML = "incorrect mail id";
-    }
-    
-    return false;
 }
+
+function pwdLength(inputData)
+{
+  if(inputData.length<4)
+  {
+    document.getElementById("pwd").innerHTML="atleast 4 characters";
+    return false;
+  }
+  else {
+    document.getElementById("pwd").innerHTML="";
+    return true;
+  }
+}
+
+function pwdMatch(inputData)
+{
+  var password=document.myForm.Password.value;
+  if(inputData!=password)
+  {
+    document.getElementById("repwd").innerHTML="Password doesnot match";
+    return false;
+  }
+  else {
+    document.getElementById("repwd").innerHTML="";
+    return true;
+  }
+}
+
 </script>
 <title>Register</title>
 </head>
 <body>
 <div class="register">
 <h2>Welcome to User Registration</h2>
-<form action="SaveUrl" name="myForm" method="post" onsubmit="return validEmail();">
+<form action="SaveUrl" name="myForm" onsubmit="return validEmail();" method="post"  >
 <table>
-<tr><td>UserName</td><td><input type="text" id="userName" name="uName" ></td></tr>
+<tr><td>UserName</td><td><input type="text" onchange="lengthMessage(this.value)" id="userName" name="uName" ></td></tr>
 <tr><td colspan="2"><span id="uname" ></span></td></tr>
-<tr><td>FullName</td><td><input type="text" id="fullName"name="fName"></td></tr>
+<tr><td>FullName</td><td><input type="text"  id="fullName"name="fName" required></td></tr>
 <tr><td colspan="2"><span id="fname" ></span></td></tr>
-<tr><td>Mail</td><td><input type="email" id="mailId" name="mail"></td></tr>
+<tr><td>Mail</td><td><input type="email"  onchange="mailMessage(this.value)" id="mailId" name="mail"></td></tr>
 <tr><td colspan="2"><span id="email" ></span></td></tr>
-<tr><td>Password</td><td><input type="password" name="Password"></td></tr>
-<tr><td colspan="2"><span id="pwd" ></span></td></tr>
-<tr><td>Retype_Password</td><td><input type="password" name="Repassword"></td></tr>
+<tr><td>Password</td><td><input type="password" onchange="pwdLength(this.value)" id="password" name="Password"></td></tr>
+<tr><td colspan="2">messageError<span id="pwd" ></span></td></tr>
+<tr><td>Retype_Password</td><td><input type="password" onchange="pwdMatch(this.value)" name="Repassword"></td></tr>
 <tr><td colspan="2"><span id="repwd" ></span></td></tr>
- <tr><td><input type="submit" value="Register"></td></tr> 
+ <tr><td><input type="submit" value="Register"></td></tr>
 </table>
+<div>
+ 
+</div>
 </form>
 </div>
+
 </body>
 </html>
