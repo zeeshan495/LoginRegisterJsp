@@ -2,7 +2,10 @@
  "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
-<web-app>
+<web-app >
+<!--   <listener>
+  <listener-class>com.bridgeit.controller.MyListener</listener-class>
+  </listener> -->
   <display-name>Archetype Created Web Application</display-name>
     <servlet>
   	<servlet-name>ResgisterServlet</servlet-name>
@@ -44,4 +47,5 @@
   	<servlet-name>LogoutServlet</servlet-name>
   	<url-pattern>/LogoutUrl</url-pattern>
   </servlet-mapping>
+  
 </web-app>

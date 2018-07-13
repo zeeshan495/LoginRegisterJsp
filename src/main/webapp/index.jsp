@@ -40,22 +40,18 @@ function validEmail()
 <tr><td>mail Id </td><td><input type="text" onchange="validEmail()" name="mailId" id="mailId"></td></tr>
 <tr><td colspan="2"><span id="email" onchange="validEmail()"></span></td></tr>
 <tr><td>Password </td><td><input type="password" name="pwd" id="pwd"></td></tr>
-<tr id="submit"><td><input  type="submit" value="LOGIN"></td></tr>
+<tr id="submit"><td><input  type="submit" value="LOGIN"></td><td><a href="ResgisterUrl">Register here</a>
+</td></tr>
 </table>
-</form>
-<a href="ResgisterUrl">Register</a>
-<%-- <%String message=null;
-if(session.getAttribute("loginError")==null)
-{
-	response.sendRedirect("index.jsp");
-}
-else 
-{
-	message = (String) session.getAttribute("loginError");
-	out.println(message);
-}
-%> --%>
+</form> 
+
 <%
+String user=(String)session.getAttribute("mail");
+if(user!=null)
+{
+	request.getRequestDispatcher("home.jsp").forward(request, response);
+}
+
 String msg=(String)request.getAttribute("loginError");
 if(msg!=null)
 {

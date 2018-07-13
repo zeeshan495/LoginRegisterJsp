@@ -3,6 +3,7 @@ package com.bridgeit.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -33,13 +34,14 @@ public class SaveServlet extends HttpServlet {
 		info.setFullName(fullName);
 		info.setMailId(mailId);
 		info.setPassword(password);
-//		System.out.println(userName+" "+fullName+" "+mailId+" "+password);
 		try {
 			boolean userExist=service.checkRegisterUser(mailId);
 			if(userExist)
 			{
-				pw.println("User already exists");
-				request.getRequestDispatcher("registerForm.jsp").include(request, response);
+				String userExistMsg="User already exists";
+				RequestDispatcher rd=request.getRequestDispatcher("registerForm.jsp");
+				request.setAttribute("userExist", userExistMsg);
+				rd.include(request, response);
 			}
 			
 		} catch (SQLException e1) {
@@ -50,7 +52,7 @@ public class SaveServlet extends HttpServlet {
 			int status=service.save(info);
 			if(status>0)
 			{
-				pw.println("You are successfully Register");
+				pw.println("You are successfully Register........");
 				pw.println("Now you can login");
 				request.getRequestDispatcher("index.jsp").include(request, response);
 			}

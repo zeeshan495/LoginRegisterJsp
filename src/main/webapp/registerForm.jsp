@@ -77,15 +77,21 @@ function pwdMatch(inputData)
 <tr><td>Mail</td><td><input type="email"  onchange="mailMessage(this.value)" id="mailId" name="mail"></td></tr>
 <tr><td colspan="2"><span id="email" ></span></td></tr>
 <tr><td>Password</td><td><input type="password" onchange="pwdLength(this.value)" id="password" name="Password"></td></tr>
-<tr><td colspan="2">messageError<span id="pwd" ></span></td></tr>
+<tr><td colspan="2"><span id="pwd" ></span></td></tr>
 <tr><td>Retype_Password</td><td><input type="password" onchange="pwdMatch(this.value)" name="Repassword"></td></tr>
 <tr><td colspan="2"><span id="repwd" ></span></td></tr>
  <tr><td><input type="submit" value="Register"></td></tr>
 </table>
 <div>
- 
 </div>
 </form>
+<%
+String msg=(String)request.getAttribute("userExist");
+if(msg!=null)
+{
+	out.println(msg);
+}
+%>
 </div>
 
 </body>

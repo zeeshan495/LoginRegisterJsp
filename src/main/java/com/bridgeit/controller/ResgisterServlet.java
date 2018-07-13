@@ -12,13 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 public class ResgisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
    
-
 //	/**
 //	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 //	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
-		System.out.println("Hello Working");
 //		response.sendRedirect("registerForm.jsp");
 	request.getRequestDispatcher("registerForm.jsp").forward(request, response);
 	}

@@ -11,8 +11,8 @@ package com.bridgeit.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -48,14 +48,22 @@ public class HomeServlet extends HttpServlet {
 //				****httpsession***
 				HttpSession session = request.getSession();
 				session.setAttribute("mail", mailId);
-				session.setMaxInactiveInterval(10*60);
+				session.setMaxInactiveInterval(15*60);
+				
+			//retriving data from servletContext ****Listeners****
+//				ServletContext ctx=request.getServletContext();
+//				int total=(Integer)ctx.getAttribute("totalUsers");
+//				int current=(Integer)ctx.getAttribute("currentUsers");
+//				pw.println("total users "+total);
+//				pw.println("current users "+current);
+				
 				response.sendRedirect("home.jsp");
 				
 			//	request.getRequestDispatcher("home.jsp").include(request, response);
 			}
 				else
 			{
-				pw.println("Please check entered mail id and password");
+				
 				String loginError="Please check entered mail id and password";
 //				Cookie ck=new Cookie("loginError",loginError);
 //				response.addCookie(ck);
