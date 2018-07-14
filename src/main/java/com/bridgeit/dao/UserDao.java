@@ -102,7 +102,7 @@ public class UserDao {
 			}
 			for(UserInfo data:list)
 			{
-				if(data.getMailId().equals(mail)&& data.getPassword().equals(pwd))
+				if(data.getMailId().equals(mail) && data.getPassword().equals(pwd))
 				{
 					return true;
 				}

@@ -12,9 +12,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -51,15 +49,16 @@ public class HomeServlet extends HttpServlet {
 				session.setMaxInactiveInterval(15*60);
 				
 			//retriving data from servletContext ****Listeners****
+				
 //				ServletContext ctx=request.getServletContext();
 //				int total=(Integer)ctx.getAttribute("totalUsers");
 //				int current=(Integer)ctx.getAttribute("currentUsers");
 //				pw.println("total users "+total);
 //				pw.println("current users "+current);
-				
-				response.sendRedirect("home.jsp");
-				
-			//	request.getRequestDispatcher("home.jsp").include(request, response);
+			//	response.sendRedirect("home.jsp");
+				RequestDispatcher rd=request.getRequestDispatcher("home.jsp");
+				request.setAttribute("mailIdUser", mailId);
+				rd.include(request, response);
 			}
 				else
 			{
@@ -71,6 +70,8 @@ public class HomeServlet extends HttpServlet {
 //				session.setAttribute("loginError", loginError);
 //				session.setMaxInactiveInterval(10*60);
 				RequestDispatcher rd=request.getRequestDispatcher("index.jsp");
+				
+				
 				request.setAttribute("loginError", loginError);
 				rd.include(request, response);
 			//	response.sendRedirect("index.jsp");
@@ -80,6 +81,11 @@ public class HomeServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		doPost(req, resp);
 	}
 
 }

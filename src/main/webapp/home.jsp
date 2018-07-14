@@ -10,6 +10,7 @@
 <%
 /* /*HttppSession*/
  String user=null;
+
 if(session.getAttribute("mail")==null)
 {
 	response.sendRedirect("index.jsp");
@@ -17,7 +18,7 @@ if(session.getAttribute("mail")==null)
 else 
 	user = (String) session.getAttribute("mail"); 
 
-
+ 
 /* String userName = null;
 Cookie[] cookies = request.getCookies();
 if(cookies !=null){
@@ -33,6 +34,16 @@ if(userName == null)
 	response.sendRedirect("index.jsp");  */
 %>
 <h1>welcome to home page</h1>
+
+<p><%String mailIdUser=null;
+mailIdUser=(String) request.getAttribute("mailIdUser"); 
+String user1=null;
+
+if(session.getAttribute("mail")!=null)
+{
+	mailIdUser=(String) session.getAttribute("mail");
+}
+out.print("User : "+mailIdUser);%></p>
 
 <form action="LogoutUrl" method="post">
 <input type="submit" value="logout">
