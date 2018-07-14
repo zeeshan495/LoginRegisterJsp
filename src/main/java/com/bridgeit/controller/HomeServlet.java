@@ -55,7 +55,7 @@ public class HomeServlet extends HttpServlet {
 //				int current=(Integer)ctx.getAttribute("currentUsers");
 //				pw.println("total users "+total);
 //				pw.println("current users "+current);
-			//	response.sendRedirect("home.jsp");
+	//			response.sendRedirect("https://www.google.com");
 				RequestDispatcher rd=request.getRequestDispatcher("home.jsp");
 				request.setAttribute("mailIdUser", mailId);
 				rd.include(request, response);
@@ -87,5 +87,7 @@ public class HomeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		doPost(req, resp);
 	}
+	
+
 
 }

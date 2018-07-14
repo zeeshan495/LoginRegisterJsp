@@ -52,8 +52,10 @@ public class SaveServlet extends HttpServlet {
 			int status=service.save(info);
 			if(status>0)
 			{
-				pw.println("You are successfully Register........");
-				pw.println("Now you can login");
+			//	pw.println("You are successfully Register........");
+			//	pw.println("Now you can login");
+				String successMsg="You are successfully Register........Now you can login";
+				request.setAttribute("succesMsg", successMsg);
 				request.getRequestDispatcher("index.jsp").include(request, response);
 			}
 			else
@@ -61,7 +63,8 @@ public class SaveServlet extends HttpServlet {
 				pw.println("oops......something went wrong");
 				request.getRequestDispatcher("index.jsp").include(request, response);
 			}
-		} catch (SQLException e) {
+		} 
+		catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}

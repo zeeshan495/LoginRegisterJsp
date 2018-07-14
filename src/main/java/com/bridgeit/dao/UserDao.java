@@ -40,6 +40,7 @@ public class UserDao {
 		ps.setString(3, info.getMailId());
 		ps.setString(4, info.getPassword());
 		status=ps.executeUpdate();
+		getConnection().close();
 		return status;
 	}
 	
@@ -58,6 +59,7 @@ public class UserDao {
 				info.setPassword(rs.getString(4));
 				list.add(info);
 			}
+		getConnection().close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -83,7 +85,7 @@ public class UserDao {
 					return true;
 				}
 			}
-		
+		getConnection().close();
 		return false;
 	}
 	
@@ -107,7 +109,7 @@ public class UserDao {
 					return true;
 				}
 			}
-		
+		getConnection().close();
 		return false;
 	}
 
