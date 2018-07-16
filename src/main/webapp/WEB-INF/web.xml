@@ -3,10 +3,30 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app >
-<!--   <listener>
-  <listener-class>com.bridgeit.controller.MyListener</listener-class>
-  </listener> -->
   <display-name>Archetype Created Web Application</display-name>
+  <filter>
+  	<filter-name>LoginFilter</filter-name>
+  	<display-name>LoginFilter</display-name>
+  	<description></description>
+  	<filter-class>com.bridgeit.controller.LoginFilter</filter-class>
+  </filter>
+  <filter>
+  	<filter-name>RegisterSaveFilter</filter-name>
+  	<display-name>RegisterSaveFilter</display-name>
+  	<description></description>
+  	<filter-class>com.bridgeit.controller.RegisterSaveFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>LoginFilter</filter-name>
+  	<url-pattern>/HomeUrl</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+  	<filter-name>RegisterSaveFilter</filter-name>
+  	<url-pattern>/SaveUrl</url-pattern>
+  </filter-mapping>
+  <listener>
+  	<listener-class>com.bridgeit.listener.MyListener</listener-class>
+  </listener>
     <servlet>
   	<servlet-name>ResgisterServlet</servlet-name>
   	<display-name>ResgisterServlet</display-name>
@@ -33,7 +53,7 @@
   </servlet>
    <servlet-mapping>
   	<servlet-name>ResgisterServlet</servlet-name>
-  	<url-pattern>/ResgisterUrl</url-pattern>
+  	<url-pattern>/RegisterUrl</url-pattern>
   </servlet-mapping> 
   <servlet-mapping>
   	<servlet-name>HomeServlet</servlet-name>

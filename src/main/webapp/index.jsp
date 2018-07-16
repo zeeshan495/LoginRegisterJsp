@@ -48,7 +48,7 @@
 				</tr>
 				<tr id="submit">
 					<td><input type="submit" value="LOGIN"></td>
-					<td><a href="ResgisterUrl">Register here</a></td>
+					<td><a href="RegisterUrl">Register here</a></td>
 				</tr>
 			</table>
 		</form>
